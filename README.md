@@ -7,3 +7,6 @@
 
 <!-- Initialize Firebase -->
 <script src="/__/firebase/init.js"></script>
+
+
+npm install -g firebase-tools
