@@ -50,6 +50,7 @@ article {
 }
 
 article h1 {
+    display: block;
     text-align: center;
     font-size: 2rem;
 }

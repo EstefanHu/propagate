@@ -34,3 +34,7 @@ nav ul li {
 nav a {
     text-decoration: none;
 }
+
+section {
+    margin: 65px auto;
+}
