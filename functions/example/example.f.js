@@ -5,12 +5,11 @@ try {
 // eslint-disable-next-line no-empty
 } catch (e) {
 } // You do that because the admin SDK can only be initialized once.
-const mkdirp = require('mkdirp-promise');
-// etc... my imports ...
+// my imports ...
 
 /**
  *  Blur offensive images uploaded on Cloud Storage.
  */
-exports = module.exports = functions.storage.object().onChange(event => {
-    // Function's code...
-});
+// exports = module.exports = functions.storage.object().onChange(event => {
+//     // Function's code...
+// });
