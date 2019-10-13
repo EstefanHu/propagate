@@ -40,7 +40,7 @@ exports.imageToJPG = functions.storage.object().onFinalize(async (object) => {
     const tempLocalJPEGFile = path.join(os.tmpdir(), JPEGFilePath);
 
     // Exit if this is triggered on a file that is not an image.
-    if (!object.contentType.startsWith('application/octet-stream')) {
+    if (!object.contentType.startsWith('image/')) {
         console.log('Ignoring file.');
         return null;
     }

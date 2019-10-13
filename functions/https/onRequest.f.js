@@ -10,7 +10,7 @@ try {
  * Create a media db entry and upload a photo on a POST request
  */
 exports.uploadPhoto = functions.https.onRequest((req, res) => {
-    const imageData64 = req.body.image;
+    const photo = req.body.photo;
     const unixTime = req.body.unixTime;
     const lat = req.body.lat;
     const long = req.body.long;
@@ -29,28 +29,16 @@ exports.uploadPhoto = functions.https.onRequest((req, res) => {
     const postID = newPostRef.key;
 
     // Upload image
-    const image = new Image();
-    image.src = imageData64;
     const storageRef = admin.storage().bucket("gs://propogate-media-bucket/").ref();
     const imageRef = storageRef.child('/' + postID);
     // eslint-disable-next-line promise/catch-or-return
-    imageRef.put(b64toBlob(imageData64));
+    imageRef.put(photo);
 
+
+    // TODO: CHANGE REFERNCE IF FILE TYPE CHANGES
     // Update the database reference to point to our newly updated image
     const dbEntryRef = dbRef.child("/media/" + postID);
     dbEntryRef.update({
         media_ref: storageRef.path + "/" + postID
     })
 });
-
-function b64toBlob(dataURI) {
-
-    const byteString = atob(dataURI.split(',')[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], {type: 'image/jpeg'});
-}
